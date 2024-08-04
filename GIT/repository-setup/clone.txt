@@ -1,10 +1,10 @@
-To clone some repository in the current directory or preferred directory(move to the path of the directory)
-This will clone the repo into this folder with the folder name you prefer.(creates a new folder and then puts the repo there)
+# To clone some repository in the current directory or preferred directory(move to the path of the directory)
+# This will clone the repo into this folder with the folder name you prefer.(creates a new folder and then puts the repo there)
 
 git clone [url] [newdirectoryname]
 
 
-just simple cloning (details as it is)
+# just simple cloning (details as it is)
 
 git clone [url]
 

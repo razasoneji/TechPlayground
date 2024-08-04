@@ -1,0 +1,14 @@
+# staging is also called as index which just keeps a snapshot of the files that you wanna upload/keep. but doesnt commit to the db.
+
+git add .   # adds all folder recursively to index.
+
+git add file1.txt   # adds a particular file
+
+git add file1.txt file2.txt javascript  #multiple files add
+
+git add *.c  # adds all .c extension files or say patternmathcing here
+
+git add GIT/creating-snapshots    # meaning that for folders and files their path with respect to main folder(which has .git ) should be given.
+
+
+

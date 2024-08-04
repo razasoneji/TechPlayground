@@ -1,0 +1,56 @@
+# global system and local are the three different levels on which we can apply configurations
+# system : applies to all the users of the device.
+# global : all repositories of the current user.
+# local : only to the current folder/repository.
+
+# use cases of configuration :
+# i can put my own code and push it to github. 
+# someone can login into his/her github and push the code from my pc if they require(using local to the folder configuration).
+
+git config --global user.name "razasoneji"
+
+git config --global user.email raz*******@gmail.com
+
+git config --global core.editor "code --wait"
+
+git config --global autocrlf true          # carriage return and linefeed handling.(due to various text editors and cross platform issues)
+
+git config --global -e  # to view the global config object
+
+
+# This is a basic .gitconfig file 
+[user]
+	email = raz*******@gmail.com
+	name = razasoneji
+[core]
+	editor = code --wait
+	autocrlf = true
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+
+# # 
+
+# can also setup configuration for a particular repository(local)
+
+git config --local user.name "person2"
+
+git config --local user.email person2@gmail.com
+
+git config --local core.editor "code --wait"
+
+git config --local -e
+
+git config --local autocrlf true
+
+
+## for geting help we have
+
+git config --help
+
+git config -h
+
+
+
