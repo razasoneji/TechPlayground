@@ -1,3 +1,9 @@
-# This will remove the file from the staged area.
+# This will take this file from the previous commit done and put it in the staging area
+# replacing the current file in staging area
+# hence the status showed in the git status will be according to the last state in the commit of file
+
 git restore --staged filename/./pattern
-adfadf
+
+
+# meaning we are actually not remvoing from the index, we are just unstaging.
+

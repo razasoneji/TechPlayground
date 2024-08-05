@@ -1,0 +1,19 @@
+# the restore command in git just puts up the file from the next stage (next but the eariler one)
+# in case of index , the next stage is the commit(previous one)
+# in case of pwd , the next stage is the index
+
+git restore filename.txt
+
+# puts up the previous state of index to pwd
+# doesnt affect the untracked files as git has no idea where to find its previous state
+
+
+
+# to clean all the local files that are not staged.
+# we can perform the following.
+
+git clean -fd 
+
+git clean -fd .
+
+git clean -fd filename
