@@ -1,0 +1,19 @@
+#commits with short message
+git commit -m "this is a short message commit"
+
+
+#commits with long message for description
+
+git commit       # it will open a tab in the default text editor 
+                 # that you can write a small description as well as a long message.
+
+
+#skipping the staging area and commit directly ( only files that are being tracked( ie:files in index))
+#files that are untracked will not be staged or commited.
+
+git commit -a
+
+git commit -a -m "commit all files ie: skipping the staging area."
+
+git commit -am "skipped staging"
+

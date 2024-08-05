@@ -1,0 +1,10 @@
+git log
+
+git log --oneline
+
+git log --reverse
+
+git log --oneline --reverse
+
+
+# shows history of commits.

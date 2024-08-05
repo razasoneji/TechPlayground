@@ -1,0 +1,17 @@
+# setup the git diff tool as vscode
+
+
+#shows in cmd which is highly unrecommended , also to add it shows difference/change between pwd and staged area
+
+git diff 
+
+# shows in cmd and also differences between the staged and last commit
+git diff --staged
+
+
+
+# we use
+git difftool
+
+#or 
+git difftool --staged

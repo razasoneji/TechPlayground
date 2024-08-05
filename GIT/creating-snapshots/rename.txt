@@ -1,0 +1,23 @@
+# to rename a file in git that has been added to tracking (staging area /index)
+# there are two ways . we can rename the files ourselves by anymethod. or we can rename it by git.
+
+# if we rename it ourselves , we have an untracked file and a deleted file .
+# we can add both of them in the staging area. yes the deleted one also.
+# so we get the renaming done.
+#even if a file is deleted from the current directory , it is still there in the staging area .
+# and needs to be either unstaged or to be added again to index to make sure it is unstage.
+# adding it back to the index . ( doesnt actually put the file in the index, rather it ensures that the file is taken snapshot and deleted.)
+
+//lets say file 1 renamed to file 2
+
+git add file1.txt
+git add file2.txt
+
+# or we can use the git command.
+
+git mv file1.txt file2.txt
+
+
+#thus renaming of tracked files are made easy by the git command.
+
+# for untracked files. even if we delete it , wont cause any issue / error

@@ -1,0 +1,8 @@
+# create a gitignore file that can ignore the files, folder etc.
+# create it in the main folder where the .git is present name it ".gitignore"
+
+# add pattern (.log) , (.class) etc or add folder name , or add file name to be ignored.
+
+# if the folder wanting to be ignored is already present in the staging area.
+# then we can have the following command "git rm --catched filename"
+

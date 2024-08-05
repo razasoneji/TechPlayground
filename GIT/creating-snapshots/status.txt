@@ -1,0 +1,3 @@
+git status #full status
+
+git status -s  #short status

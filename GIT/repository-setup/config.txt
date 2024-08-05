@@ -17,6 +17,13 @@ git config --global autocrlf true          # carriage return and linefeed handli
 
 git config --global -e  # to view the global config object
 
+git config --global diff.tool vscode    #setting up vs code as the diff tool
+
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+
+
+
+
 
 # This is a basic .gitconfig file 
 [user]

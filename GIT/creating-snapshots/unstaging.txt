@@ -1,0 +1,3 @@
+# This will remove the file from the staged area.
+git restore --staged filename/./pattern
+adfadf

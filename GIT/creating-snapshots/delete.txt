@@ -1,0 +1,21 @@
+# there are basically two meaning of delete when we talk about a repo that is being version controlled.
+# 1. deleting files in git means either you can remove it from pwd and then stage changes(index it) and commit.
+# 2. deleting also means you just want to remove the file from the staging area only( due to any reasons).
+
+# to remove it from the project
+delete the file
+git add filename.txt     or    git add .    ( whichever is preferred)
+git commit ( if required)
+
+otherwise:::::
+ 
+git rm filename  (does this all in one command).
+
+# to remove it from the staging area only
+
+git rm --catched filename
+
+# When you commit after running this command,
+# the file will be removed from the repository but will still be present in your local filesystem.
+# ie file moved from tracking to untracking
+
