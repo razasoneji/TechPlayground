@@ -13,7 +13,7 @@ git rm filename  (does this all in one command).
 
 # to remove it from the staging area only
 
-git rm --catched filename
+git rm --cached filename
 
 # When you commit after running this command,
 # the file will be removed from the repository but will still be present in your local filesystem.
