@@ -1,0 +1,8 @@
+# moving to the detached head state also we are moving to the old commit
+
+git checkout (id given by the git log --oneline)
+
+# to restore to old state ( ie: head points to master and master points to last in the commit)
+
+git checkout master
+

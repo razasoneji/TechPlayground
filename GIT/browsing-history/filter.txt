@@ -1,0 +1,19 @@
+## shows all the commits for the particular file 
+
+git log --oneline filename.txt                  or         git log --oneline --filename/path
+git log --oneline filepath
+
+
+# last few commits see
+
+git log --oneline -3   ## last 3 commits can be seen
+
+# to see the commits with the author 
+
+git log --oneline --author="xyz"
+
+
+# to filter on the basis of code / content
+
+git log --oneline -S"hello()"           # filters on basis of content , all commits adding hello() or removing hello() will be shown.
+ 

@@ -1,0 +1,15 @@
+git log
+
+git log --oneline
+
+git log --reverse
+
+git log --oneline --reverse
+
+git log --stat    ## shows what files have been changed/updated in the commit
+
+git log --oneline --stat  ## show what files have been changed/update in the commit in one line message
+
+
+git log --patch ## shows in cmd diff .
+
