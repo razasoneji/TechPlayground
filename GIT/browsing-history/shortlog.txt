@@ -1,0 +1,8 @@
+git shortlog
+#shows commits by each author's 
+
+git shortlog -h   #git helpline
+
+git shortlog -c  #sorts on the basis of committer
+
+#note committer and author can be same as well as different persons.

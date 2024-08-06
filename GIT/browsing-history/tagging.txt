@@ -1,0 +1,19 @@
+#to set up a tag for versioning of our commits.
+
+git tag v1.0 __commit_id__
+
+
+# how to get the repository back to the old versioning or testing some feature there
+
+git checkout v.10
+
+
+git tag -a v.10 -m "this is small description"
+
+
+git tag #displays all taggs
+
+git tag -n #displays all tags along with the messages
+
+
+git tag -d v1.1   # deletes the version 1.1 tag( just deletes the tag not the commit / library)

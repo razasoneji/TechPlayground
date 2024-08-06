@@ -1,0 +1,2 @@
+git log filename.txt     ## shows the commits related to that file
+

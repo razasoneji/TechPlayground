@@ -6,3 +6,4 @@ git checkout (id given by the git log --oneline)
 
 git checkout master
 
+#moving to any commit and then doing the experiments can be done , but it is just advisable verify the process once

@@ -1,0 +1,11 @@
+#we delete a file
+
+git rm file1.txt 
+
+git commit -m "some message"
+
+# we want to restore the files after some commits lets say
+
+git checkout __commit_id__ filename/path
+
+#file restored
