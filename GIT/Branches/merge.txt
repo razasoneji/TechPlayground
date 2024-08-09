@@ -1,0 +1,6 @@
+# there are different types of merges, the fastforward merge ( when we have linear branches)
+# the three way merge when we have diverted the branches.
+
+git log --oneline --all --graph
+
+git merge branch name # if it is a linear branch then git will fastforward merge.

@@ -1,0 +1,6 @@
+git log master..bugfix
+
+git diff master..bugfix
+
+git difftool master..bugfix
+

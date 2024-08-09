@@ -1,0 +1,12 @@
+git stash push -m"message of the stash"
+#state of the branch and index there is saved / preserved.
+
+git stash list
+
+git stash show 1 # shows the stash no 1
+
+git stash apply 1 # applies the given stash to the working directory.
+
+git stash drop 1 # drops the no 1 branch
+
+git stash clear # clears everything

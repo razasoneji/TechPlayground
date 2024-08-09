@@ -1,0 +1,15 @@
+git branch feaure1
+#creates new branch feature one, we are still on the master one.
+
+git branch # gives all the branches
+
+git status # shows which branch we are in
+
+
+git switch bugfix # switches the head from master to bugfix
+
+git checkout bugfix # does the same as the above 
+
+git switch -c teammate2 # creates a new branch teammate2 and switches to it.
+
+git branch -d teammate2 # deletes the teammate2 branch.
