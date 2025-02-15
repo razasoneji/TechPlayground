@@ -1,6 +1,7 @@
 package com.project.basicloginsignuprole.Services;
 
 
+import com.project.basicloginsignuprole.Entities.LoginResponse;
 import com.project.basicloginsignuprole.Entities.User;
 import com.project.basicloginsignuprole.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,16 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public String login(String username, String password) {
+
+//
+    public LoginResponse login(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(username);
+            return LoginResponse.builder()
+                    .userId( ( (User) authentication.getPrincipal() ).getId())
+                    .accessToken(jwtService.generateAccessToken(username))
+                    .refreshToken(jwtService.generateRefreshToken(username)).build();
         }
         throw new RuntimeException("Invalid credentials");
     }
@@ -38,4 +44,25 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public LoginResponse refreshToken(String refreshToken) {
+
+        String Username = jwtService.extractUsername(refreshToken);
+        if(!(jwtService.validateToken(refreshToken,Username))){
+            throw new RuntimeException("Invalid refresh token");
+        }
+        return LoginResponse.builder()
+                .userId(userRepository.findByUsername(Username).get().getId())
+                .accessToken(jwtService.generateAccessToken(Username))
+                .refreshToken(refreshToken).build();
+    }
+
+    //public String login(String username, String password) {
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(username, password));
+//        if (authentication.isAuthenticated()) {
+//            return jwtService.generateAccessToken(username);
+//        }
+//        throw new RuntimeException("Invalid credentials");
+//    }
 }

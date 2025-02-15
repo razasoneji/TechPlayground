@@ -17,20 +17,30 @@ public class JwtService {
 
     private final String secretKey;
 
+    private final long refreshExpiration;
 
-    private final long expiration;
+    private final long accessExpiration;
 
-    public JwtService(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") long expiration) {
+    public JwtService(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") long accessExpiration, @Value("${jwt.refresh.expiration}") long refreshExpiration) {
         this.secretKey = secretKey;
-        this.expiration = expiration;
+        this.accessExpiration = accessExpiration;
+        this.refreshExpiration = refreshExpiration;
     }
 
 
-    public String generateToken(String email) {
+    public String generateAccessToken(String email) {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .expiration(new Date(System.currentTimeMillis() + accessExpiration))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+    public String generateRefreshToken(String email) {
+        return Jwts.builder()
+                .subject(email)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + refreshExpiration))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
