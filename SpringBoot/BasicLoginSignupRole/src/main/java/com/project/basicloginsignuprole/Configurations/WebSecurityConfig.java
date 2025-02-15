@@ -1,6 +1,7 @@
 package com.project.basicloginsignuprole.Configurations;
 
 import com.project.basicloginsignuprole.Filters.JwtAuthFilter;
+import com.project.basicloginsignuprole.Handlers.OAuth2SuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +21,14 @@ public class WebSecurityConfig {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Allow public access to auth endpoints
+                        .requestMatchers("/api/auth/**","/home.html").permitAll() // Allow public access to auth endpoints
                         .requestMatchers("/api/mock/user").hasRole("USER") // Only users with USER role can access
                         .requestMatchers("/api/mock/admin").hasRole("ADMIN") // Only users with ADMIN role can access
                         .anyRequest().authenticated() // Secure all other endpoints
@@ -32,7 +36,10 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless session
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oauth2Config ->oauth2Config
+                        .failureUrl("/login?error=true")
+                        .successHandler(oAuth2SuccessHandler)); // Add JWT filter
 
         return http.build();
     }

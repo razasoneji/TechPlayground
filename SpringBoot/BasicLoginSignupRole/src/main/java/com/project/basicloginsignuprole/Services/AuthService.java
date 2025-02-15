@@ -28,15 +28,30 @@ public class AuthService {
 
 
 //
+//    public LoginResponse login(String username, String password) {
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(username, password));
+//        if (authentication.isAuthenticated()) {
+//            return LoginResponse.builder()
+//                    .userId( ( (User) authentication.getPrincipal() ).getId())
+//                    .accessToken(jwtService.generateAccessToken(username))
+//                    .refreshToken(jwtService.generateRefreshToken(username)).build();
+//        }
+//        throw new RuntimeException("Invalid credentials");
+//    }
+
     public LoginResponse login(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
+
         if (authentication.isAuthenticated()) {
-            return LoginResponse.builder()
-                    .userId( ( (User) authentication.getPrincipal() ).getId())
-                    .accessToken(jwtService.generateAccessToken(username))
-                    .refreshToken(jwtService.generateRefreshToken(username)).build();
+            LoginResponse response = new LoginResponse();
+            response.setUserId(((User) authentication.getPrincipal()).getId());
+            response.setAccessToken(jwtService.generateAccessToken(username));
+            response.setRefreshToken(jwtService.generateRefreshToken(username));
+            return response;
         }
+
         throw new RuntimeException("Invalid credentials");
     }
 
@@ -45,16 +60,34 @@ public class AuthService {
         return userRepository.save(user);
     }
 
-    public LoginResponse refreshToken(String refreshToken) {
+//    public LoginResponse refreshToken(String refreshToken) {
+//
+//        String Username = jwtService.extractUsername(refreshToken);
+//        if(!(jwtService.validateToken(refreshToken,Username))){
+//            throw new RuntimeException("Invalid refresh token");
+//        }
+//        return LoginResponse.builder()
+//                .userId(userRepository.findByUsername(Username).get().getId())
+//                .accessToken(jwtService.generateAccessToken(Username))
+//                .refreshToken(refreshToken).build();
+//    }
 
-        String Username = jwtService.extractUsername(refreshToken);
-        if(!(jwtService.validateToken(refreshToken,Username))){
+    public LoginResponse refreshToken(String refreshToken) {
+        String username = jwtService.extractUsername(refreshToken);
+
+        if (!jwtService.validateToken(refreshToken, username)) {
             throw new RuntimeException("Invalid refresh token");
         }
-        return LoginResponse.builder()
-                .userId(userRepository.findByUsername(Username).get().getId())
-                .accessToken(jwtService.generateAccessToken(Username))
-                .refreshToken(refreshToken).build();
+
+        LoginResponse response = new LoginResponse();
+        response.setUserId(userRepository.findByUsername(username).get().getId());
+        response.setAccessToken(jwtService.generateAccessToken(username));
+        response.setRefreshToken(refreshToken);
+        return response;
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByUsername(email).orElse(null);
     }
 
     //public String login(String username, String password) {
