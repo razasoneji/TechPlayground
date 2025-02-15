@@ -4,5 +4,5 @@ spring:
       client:
         registration:
           google:
-            client-id: removed this
-            client-secret: removed this
+            client-id:
+            client-secret:

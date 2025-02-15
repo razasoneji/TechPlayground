@@ -26,6 +26,9 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private SessionService sessionService;
+
 
 //
 //    public LoginResponse login(String username, String password) {
@@ -48,7 +51,9 @@ public class AuthService {
             LoginResponse response = new LoginResponse();
             response.setUserId(((User) authentication.getPrincipal()).getId());
             response.setAccessToken(jwtService.generateAccessToken(username));
-            response.setRefreshToken(jwtService.generateRefreshToken(username));
+            String refreshToken = jwtService.generateRefreshToken(username);
+            response.setRefreshToken(refreshToken);
+            sessionService.generateNewSession((User) authentication.getPrincipal(),refreshToken);
             return response;
         }
 
@@ -74,7 +79,7 @@ public class AuthService {
 
     public LoginResponse refreshToken(String refreshToken) {
         String username = jwtService.extractUsername(refreshToken);
-
+        sessionService.validateSession(refreshToken);
         if (!jwtService.validateToken(refreshToken, username)) {
             throw new RuntimeException("Invalid refresh token");
         }

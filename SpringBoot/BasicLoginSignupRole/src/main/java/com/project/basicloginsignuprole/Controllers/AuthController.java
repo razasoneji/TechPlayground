@@ -7,6 +7,7 @@ package com.project.basicloginsignuprole.Controllers;
 import com.project.basicloginsignuprole.Entities.LoginResponse;
 import com.project.basicloginsignuprole.Entities.User;
 import com.project.basicloginsignuprole.Services.AuthService;
+import com.project.basicloginsignuprole.Services.SessionService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,8 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
