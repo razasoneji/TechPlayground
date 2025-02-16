@@ -19,4 +19,7 @@ public class MockController {
     public String adminEndpoint() {
         return "Only admins can access this endpoint!";
     }
+
+    @GetMapping("/tester")
+    public String testerEndpoint() { return "Only testers can access this endpoint!";}
 }

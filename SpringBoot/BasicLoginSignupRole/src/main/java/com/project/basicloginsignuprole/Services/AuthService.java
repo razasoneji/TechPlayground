@@ -53,7 +53,8 @@ public class AuthService {
             response.setAccessToken(jwtService.generateAccessToken(username));
             String refreshToken = jwtService.generateRefreshToken(username);
             response.setRefreshToken(refreshToken);
-            sessionService.generateNewSession((User) authentication.getPrincipal(),refreshToken);
+            User userr = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+            sessionService.generateNewSession(userr,refreshToken);
             return response;
         }
 

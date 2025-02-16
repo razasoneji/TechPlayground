@@ -65,7 +65,7 @@ public class User implements UserDetails {
 
     private String name;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)  // required else would be stored like numbers , indexes.
     @Column(nullable = false)
     private Role role;
 

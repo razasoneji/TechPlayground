@@ -24,22 +24,41 @@ public class WebSecurityConfig {
     @Autowired
     private OAuth2SuccessHandler oAuth2SuccessHandler;
 
+    //better to define it like this
+    private static final String[] publicRoutes = {
+            "/api/auth/**","/home.html"
+    };
+
+    private static final String[] userRoutes = {
+            "/api/mock/user"
+    };
+
+    private static final String[] adminRoutes = {
+            "/api/mock/admin"
+    };
+
+    private static final String[] testerRoutes = {
+            "/api/mock/tester"
+    };
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/home.html").permitAll() // Allow public access to auth endpoints
-                        .requestMatchers("/api/mock/user").hasRole("USER") // Only users with USER role can access
-                        .requestMatchers("/api/mock/admin").hasRole("ADMIN") // Only users with ADMIN role can access
+                        .requestMatchers(publicRoutes).permitAll() // Allow public access to auth endpoints
+                        .requestMatchers(userRoutes).hasRole("USER") // Only users with USER role can access
+                        .requestMatchers(adminRoutes).hasRole("ADMIN")// Only users with ADMIN role can access
+                        .requestMatchers(testerRoutes).hasRole("TESTER")
                         .anyRequest().authenticated() // Secure all other endpoints
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless session
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login(oauth2Config ->oauth2Config
-                        .failureUrl("/login?error=true")
-                        .successHandler(oAuth2SuccessHandler)); // Add JWT filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//                .oauth2Login(oauth2Config ->oauth2Config
+//                        .failureUrl("/login?error=true")
+//                        .successHandler(oAuth2SuccessHandler)); // Add JWT filter
 
         return http.build();
     }

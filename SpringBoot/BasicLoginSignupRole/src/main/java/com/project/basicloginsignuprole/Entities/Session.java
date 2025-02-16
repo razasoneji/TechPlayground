@@ -8,6 +8,26 @@ import java.time.LocalDateTime;
 @Entity
 public class Session {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String refreshToken;
+
+    @CreationTimestamp
+    private LocalDateTime lastUsedAt;
+
+    @ManyToOne
+    private User user;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public Session(Long id, String refreshToken, LocalDateTime lastUsedAt, User user) {
         this.id = id;
         this.refreshToken = refreshToken;
@@ -42,24 +62,4 @@ public class Session {
         this.user = user;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
-    private String refreshToken;
-
-    @CreationTimestamp
-    private LocalDateTime lastUsedAt;
-
-    @ManyToOne
-    private User user;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
